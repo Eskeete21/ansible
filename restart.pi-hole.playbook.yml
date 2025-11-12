@@ -1,0 +1,26 @@
+---
+- name: Restart Pi-hole services
+  host: all
+  become: yes
+
+  tasks:
+    - name: Restart Pi-hole FTL service
+      ansible.builtin.service:
+        name: pihole-FTL
+        state: restarted
+    
+    - name: Restart lighttpd web service
+      ansible.builtin.service:
+        name: lighttpd
+        state: restarted
+
+    - name: Verify Pi-hole status
+      ansible.builtin.command: pihole status
+      register: pihole_status
+      changed_when: false
+
+    - name: Show Pi-hole status output
+      ansible.builtin.debug:
+        var: pihole_status_stdout
+        
+
