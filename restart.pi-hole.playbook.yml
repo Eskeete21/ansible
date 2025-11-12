@@ -1,6 +1,6 @@
 ---
 - name: Restart Pi-hole services
-  host: all
+  host: eskeete@192.168.1.142
   become: yes
 
   tasks:
